@@ -39,14 +39,22 @@ export class AttemptQuestionComponent implements OnInit {
   ngOnInit(): void {
     let results = localStorage.getItem('results') ?? '';
     let parsedResults = JSON.parse(results);
+    console.log("parsedResults >>>>>>>>>>>>");
+    console.log(parsedResults);
+    this.ASSESTMENT = [];
     for(let i = 0; i < parsedResults.length; i++) {
-      this.ASSESTMENT[i].position = i+1;
-      this.ASSESTMENT[i].question = parsedResults[i].question;
-      this.ASSESTMENT[i].student_answer = parsedResults[i].question;
-      this.ASSESTMENT[i].llm_answer = parsedResults[i].question;
-      this.ASSESTMENT[i].gpt_result = parsedResults[i].question;
-      this.ASSESTMENT[i].gpt_feedback = parsedResults[i].question;
-      this.ASSESTMENT[i].score = parsedResults[i].question;
+      console.log(parsedResults[i].question);
+      this.ASSESTMENT[i] = {
+        position: i + 1,
+        question: parsedResults[i].question,
+        student_answer: parsedResults[i].student_answer,
+        llm_answer: parsedResults[i].llm_answer,
+        gpt_result: parsedResults[i].result,
+        gpt_feedback: parsedResults[i].feedback,
+        sbert_result: '',
+        score: parsedResults[i].score.toString()
+      };
+  
     }
     this.isVisible = true;
     this.dataSource = new MatTableDataSource(this.ASSESTMENT);  

@@ -20,9 +20,8 @@ export class BackendApisService {
 
   postAnswersFromCandidateAndGetResult(inputs: any): Observable<any> {
     const body = { inputs: inputs.questionAnswerSetFromStudent };
-    
-    console.log('body >>>>>>>>> ');
     console.log(body);
+    console.log('body >>>>>>>>> ');
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.apiUrl, body, { headers: headers }).pipe(
       catchError(this.handleError)
